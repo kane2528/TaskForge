@@ -9,9 +9,6 @@ app.get("/health", (req, res) => {
   res.send("OK");
 });
 
-app.get("/", (req, res) => {
-  res.redirect("/tasks");
-});
 
 app.use("/api/tasks", tasks);
 
