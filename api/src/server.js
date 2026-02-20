@@ -8,6 +8,9 @@ app.use(express.json());
 app.get("/health", (req, res) => {
   res.send("OK");
 });
+app.get("/", (req, res) => {
+  res.redirect("/tasks");
+});
 
 app.use("/tasks", tasks);
 

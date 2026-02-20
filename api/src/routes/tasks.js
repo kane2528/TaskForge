@@ -19,6 +19,15 @@ router.post("/", (req, res) => {
     });
   });
 });
+router.get("/tasks", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT * FROM tasks");
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 // ➖ Remove Task
 router.delete("/:id", (req, res) => {
