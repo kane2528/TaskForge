@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
   res.redirect("/tasks");
 });
 
-app.use("/tasks", tasks);
+app.use("/api/tasks", tasks);
 
 (async () => {
   try {

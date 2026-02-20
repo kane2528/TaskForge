@@ -1,91 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TaskForge</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-      text-align: center;
-      padding: 40px;
-    }
-    input {
-      padding: 10px;
-      width: 250px;
-    }
-    button {
-      padding: 10px 15px;
-      margin-left: 5px;
-      cursor: pointer;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin: 10px 0;
-      background: #1e293b;
-      padding: 10px;
-      border-radius: 5px;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>🚀 TaskForge</h1>
-
-<input id="taskInput" placeholder="Enter task" />
-<button onclick="addTask()">Add</button>
-
-<ul id="taskList"></ul>
-
-<script>
-const API = "/api";
-
-async function loadTasks() {
-  const res = await fetch(API + "/tasks");
-  const tasks = await res.json();
-
-  const list = document.getElementById("taskList");
-  list.innerHTML = "";
-
-  tasks.forEach(task => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      ${task.title}
-      <button onclick="deleteTask(${task.id})">❌</button>
-    `;
-    list.appendChild(li);
-  });
-}
-
-async function addTask() {
-  const input = document.getElementById("taskInput");
-  const title = input.value;
-
-  await fetch(API + "/tasks", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title })
-  });
-
-  input.value = "";
-  loadTasks();
-}
-
-async function deleteTask(id) {
-  await fetch(API + "/tasks/" + id, {
-    method: "DELETE"
-  });
-
-  loadTasks();
-}
-
-loadTasks();
-</script>
+  <div class="container">
+    <h1>🚀 TaskForge</h1>
+    <p>Simple Dockerized Task Manager</p>
+    <button onclick="window.location.href='/tasks.html'">
+      View Tasks
+    </button>
+  </div>
 
 </body>
 </html>
