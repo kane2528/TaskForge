@@ -8,26 +8,29 @@ app.use(express.json());
 app.get("/health", (req, res) => {
   res.send("OK");
 });
+
 app.get("/", (req, res) => {
   res.redirect("/tasks");
 });
 
 app.use("/tasks", tasks);
 
-db.connect((err) => {
-  if (err) {
-    console.error("DB connection failed:", err);
+(async () => {
+  try {
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS tasks (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255)
+      )
+    `);
+
+    app.listen(5000, "0.0.0.0", () => {
+      console.log("Server running on port 5000");
+    });
+
+  } catch (err) {
+    console.error("DB initialization failed:", err);
     process.exit(1);
   }
+})();
 
-  db.query(`
-    CREATE TABLE IF NOT EXISTS tasks (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      title VARCHAR(255)
-    )
-  `);
-
-  app.listen(5000, "0.0.0.0", () => {
-    console.log("Server running on port 5000");
-  });
-});
