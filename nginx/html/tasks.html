@@ -131,30 +131,29 @@ async function addTask() {
 
   if (!input.value.trim()) return;
 
-  await fetch("/api/tasks", {
+  const res = await fetch("/api/tasks", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title: input.value })
   });
 
- if (res.ok) {
-  input.value = "";
-  location.href = location.href;
-}
+  if (res.ok) {
+    input.value = "";
+    location.reload();
+  }
 }
 
 async function deleteTask(id) {
-  await fetch("/api/tasks/" + id, {
+  const res = await fetch("/api/tasks/" + id, {
     method: "DELETE"
   });
 
-    if (res.ok) {
-    window.location.reload();
+  if (res.ok) {
+    location.reload();
   } else {
     alert("Failed to delete task");
   }
 }
-
 function goHome() {
   window.location.href = "index.html";
 }
