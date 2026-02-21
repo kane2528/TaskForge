@@ -1,5 +1,6 @@
 TASKFORGE
-A production-style Dockerized Task Manager API built using Node.js, Express, MySQL, Nginx, and deployed on AWS EC2.
+-----------------------------------------------------------------------------------------------------------------
+a production-style Dockerized Task Manager API built using Node.js, Express, MySQL, Nginx, and deployed on AWS EC2.
 This project demonstrates real-world backend architecture with containerized services, reverse proxy routing, database orchestration handling, and production-ready networking.
 
 Browser
