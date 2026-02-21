@@ -137,12 +137,10 @@ async function addTask() {
     body: JSON.stringify({ title: input.value })
   });
 
-   if (res.ok) {
-    input.value = "";
-    window.location.reload();  // 🔄 reload after add
-  } else {
-    alert("Failed to add task");
-  }
+ if (res.ok) {
+  input.value = "";
+  location.href = location.href;
+}
 }
 
 async function deleteTask(id) {
