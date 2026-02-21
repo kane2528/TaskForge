@@ -119,7 +119,7 @@ async function loadTasks() {
 
     li.innerHTML = `
       <span>${task.title}</span>
-      <button class="delete-btn" onclick="deleteTask(${task.id})">❌</button>
+      <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
     `;
 
     list.appendChild(li);
@@ -137,8 +137,12 @@ async function addTask() {
     body: JSON.stringify({ title: input.value })
   });
 
-  input.value = "";
-  loadTasks();
+   if (res.ok) {
+    input.value = "";
+    window.location.reload();  // 🔄 reload after add
+  } else {
+    alert("Failed to add task");
+  }
 }
 
 async function deleteTask(id) {
@@ -146,10 +150,10 @@ async function deleteTask(id) {
     method: "DELETE"
   });
 
-  // 👇 Instant UI update without full reload
-  const taskElement = document.getElementById("task-" + id);
-  if (taskElement) {
-    taskElement.remove();
+    if (res.ok) {
+    window.location.reload();
+  } else {
+    alert("Failed to delete task");
   }
 }
 
